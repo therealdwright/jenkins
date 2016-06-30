@@ -25,7 +25,7 @@ When you are ready to build the AMI's in your own account, adjust the `packer/co
 
 The Dockerfile in this repository is built in a public repository in quay.io.
 
-## AWS components
+## AWS components:
 The Jenkins template comes with a number of components that probably require a bit of further explanation, they are as follows:
 * CloudWatch Logs sending a number of metrics to a CloudWatch Log Stream created as part of the template such as:
   * Docker Container Logs sending std out of your Jenkins container to the stream.
@@ -40,5 +40,5 @@ The Jenkins template comes with a number of components that probably require a b
 * SSL Certificate is used, please specify a valid IAM SSL Certificate in your account to use the instance with SSH. If you do not wish to do this, though I would not recommend, remove thee SSL certificate parameter and change the ELB listener to use port 80 to your private IP.
 * Route 53 record creation is created by you specifying a Route53 zone in your AWS Account, this is updated at the end of the stack creation so you can log in to the Jenkins instance using this.
 
-## Credit
+## Credit:
 This template has used a lot of the concepts from the repository at https://github.com/thefactory/cloudformation-jenkins I'm unsure if this repository is still being maintained. I've used some of their concepts but built this template out using a lot of the things I felt were missing. Big thanks to The Factory, they were very useful when I started exploring the path of automating Jenkins.
