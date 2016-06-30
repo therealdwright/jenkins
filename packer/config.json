@@ -1,0 +1,7 @@
+{
+	"auths": {
+		"quay.io": {
+			"auth": "<quay token here (1pass)>"
+		}
+	}
+}

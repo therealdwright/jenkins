@@ -1,0 +1,70 @@
+{
+  "variables": {
+    "aws_key": "{{ env `AWS_ACCESS_KEY` }}",
+    "aws_secret": "{{ env `AWS_SECRET_KEY` }}",
+    "APP_NAME": "jenkins-docker-host",
+    "APP_VERSION": "latest",
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{ user `aws_key` }}",
+      "secret_key": "{{ user `aws_secret` }}",
+      "region": "us-west-2",
+      "source_ami": "ami-9abea4fb",
+      "ssh_username": "ubuntu",
+      "instance_type": "t2.micro",
+      "ami_name": "jenkins-docker-host {{timestamp}}",
+      "ami_regions": [
+        "ap-southeast-2",
+        "us-west-1"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get update -y",
+        "sudo apt-get install -y software-properties-common git",
+        "sudo apt-get install -y awscli",
+        "sudo apt-get -y install -y python-setuptools",
+        "sudo mkdir aws-cfn-bootstrap-latest",
+        "sudo curl https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz | sudo tar xz -C aws-cfn-bootstrap-latest --strip-components 1",
+        "sudo easy_install aws-cfn-bootstrap-latest",
+        "sudo cp aws-cfn-bootstrap-latest/bin/cfn-hup /usr/bin/",
+        "sudo chmod u+x /usr/bin/cfn*",
+        "sudo apt-get update -y",
+        "sudo apt-get update -y",
+        "sudo apt-get install unzip -y",
+        "sudo apt-get install libwww-perl libdatetime-perl -y",
+        "sudo apt-get install apt-transport-https ca-certificates -y",
+        "sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D",
+        "echo deb https://apt.dockerproject.org/repo ubuntu-trusty main | sudo tee --append /etc/apt/sources.list.d/docker.list",
+        "sudo apt-get update  -y ",
+        "sudo apt-cache policy docker-engine",
+        "sudo apt-get install docker-engine -y",
+        "sudo apt-get install python-pip -y",
+        "sudo usermod -aG docker ubuntu",
+        "sudo sh -c 'curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose'",
+        "sudo chmod +x /usr/local/bin/docker-compose",
+        "curl http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.1.zip -O",
+        "unzip CloudWatchMonitoringScripts-1.2.1.zip",
+        "rm CloudWatchMonitoringScripts-1.2.1.zip",
+        "sudo mv aws-scripts-mon /opt/"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "config.json",
+      "destination": "/tmp/config.json"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo mkdir /root/.docker",
+        "sudo cp /tmp/config.json /root/.docker/config.json"
+      ]
+    }
+  ]
+}
