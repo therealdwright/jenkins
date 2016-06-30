@@ -77,13 +77,13 @@
   "Mappings": {
     "RegionMap": {
       "ap-southeast-2": {
-        "AMI": "ami-xxxxxxxx"
+        "AMI": "ami-9e614afd"
       },
       "us-west-1": {
-        "AMI": "ami-xxxxxxxx"
+        "AMI": "ami-063c7b66"
       },
       "us-west-2": {
-        "AMI": "ami-xxxxxxxx"
+        "AMI": "ami-4e7dbb2e"
       }
     }
   },
