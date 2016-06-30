@@ -3,7 +3,7 @@
     "aws_key": "{{ env `AWS_ACCESS_KEY` }}",
     "aws_secret": "{{ env `AWS_SECRET_KEY` }}",
     "APP_NAME": "jenkins-docker-host",
-    "APP_VERSION": "latest",
+    "APP_VERSION": "latest"
   },
   "builders": [
     {
