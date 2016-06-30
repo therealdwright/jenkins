@@ -55,13 +55,14 @@
       "Description": "List of VPC private subnet IDs for the server",
       "Type": "List<AWS::EC2::Subnet::Id>"
     },
-    "bastionHostSecurityGroup": {
-      "Description": "A valid Security Group of Bastion Hosts for SSH Access",
-      "Type": "List<AWS::EC2::SecurityGroup::Id>"
-    },
     "vpcId": {
       "Description": "VPC associated with the provided subnets",
       "Type": "AWS::EC2::VPC::Id"
+    },
+    "bastionHostSecurityGroup": {
+      "Description": "A valid Security Group of Bastion Hosts for SSH Access",
+      "Default": "sg-xxxxxxxx",
+      "Type": "String"
     },
     "snsTopic": {
       "Default": "arn:aws:sns:us-west-2:12345678910:Email-Notifications",
