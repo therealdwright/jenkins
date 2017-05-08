@@ -597,7 +597,7 @@
           },
           {
             "Name": "Filesystem",
-            "Value": "/dev/disk/by-uuid/8ea401db-b84b-4cd6-a628-d72f30bbf1e5"
+            "Value": "/dev/xvda1"
           },
           {
             "Name": "MountPath",
