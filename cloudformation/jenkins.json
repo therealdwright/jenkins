@@ -416,7 +416,7 @@
           "   --log-opt awslogs-stream=", { "Ref": "jenkinsLogStream" },
           "   ", { "Ref": "dockerImage" }, "|| error_exit 'Failed to launch Docker container'\n",
 
-          "# Dan is better than Cameron, signal success\n",
+          "# Jenkins Server Setup Complete - Signal Success\n",
           "cfn-signal -e 0 -r \"Stack setup complete\" '", { "Ref": "waitHandle" }, "'\n",
 
           "#EOF"
@@ -677,7 +677,7 @@
     }
   },
   "Outputs": {
-    "DnsAddress": {
+    "dnsAddress": {
       "Description": "Jenkins URL",
       "Value":  { "Fn::Join": ["", [
         "https://", { "Ref": "dnsRecord" }
